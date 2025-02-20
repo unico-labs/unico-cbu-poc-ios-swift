@@ -55,7 +55,7 @@ class ViewController: UIViewController {
     
     let myLabel2: UILabel = {
         let label = UILabel()
-        label.text = "Abaixo insira o ID gerado:"
+        label.text = "Abaixo insira o Link ou ID gerado:"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14)
         label.font = UIFont(name: "AtkinsonHyperlegible-Regular" , size: 14)
@@ -162,10 +162,23 @@ class ViewController: UIViewController {
     
     @objc func buttonTapped() {
                  guard let urlString = inputTextField.text, !urlString.isEmpty else {
-                    showErrorAlert("\nPor favor, insira uma URL. b,mn\n Please enter a URL.")
+                    showErrorAlert("\nPor favor, insira uma URL.\n\n Please enter a URL.")
                     return
                 }
-                    let fullURLString = "https://cadastro.uat.unico.app/process/\(urlString)"
+        
+                 let fullURLString: String
+        
+                 if urlString.hasPrefix("https://cadastro") {
+
+                    fullURLString = urlString
+                    print("\(urlString)")
+                    
+                     
+                 } else {
+
+                    fullURLString = "https://cadastro.uat.unico.app/process/\(urlString)"
+                     
+                 }
                     guard let url = URL(string: fullURLString) else {
                     showErrorAlert("\nA URL inserida não é válida.\n\n The URL entered is not valid.")
                     return
